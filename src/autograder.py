@@ -13,8 +13,10 @@
 
 
 # imports from python standard library
+import types
+
 import grading
-import imp
+import importlib.util
 import optparse
 import os
 import re
@@ -121,7 +123,8 @@ def loadModuleString(moduleSource):
     #
     #f = StringIO(moduleCodeDict[k])
     #tmp = imp.load_module(k, f, k, (".py", "r", imp.PY_SOURCE))
-    tmp = imp.new_module(k)
+    # imp replacement from https://stackoverflow.com/a/32175781/1251716
+    tmp = types.ModuleType(k)  #imp.new_module(k)
     exec(moduleCodeDict[k], tmp.__dict__)
     setModuleName(tmp, k)
     return tmp
@@ -130,7 +133,12 @@ import py_compile
 
 def loadModuleFile(moduleName, filePath):
     with open(filePath, 'r') as f:
-        return imp.load_module(moduleName, f, "%s.py" % moduleName, (".py", "r", imp.PY_SOURCE))
+        # imp replacement from: https://stackoverflow.com/a/41595552/1251716
+        spec = importlib.util.spec_from_file_location(moduleName, filePath)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+        # return imp.load_module(moduleName, f, "%s.py" % moduleName, (".py", "r", imp.PY_SOURCE))
 
 
 def readFile(path, root=""):
