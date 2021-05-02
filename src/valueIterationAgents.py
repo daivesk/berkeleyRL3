@@ -45,7 +45,12 @@ class ValueIterationAgent(ValueEstimationAgent):
 
         # Write value iteration code here
         "*** YOUR CODE HERE ***"
-
+        for i in range(self.iterations):
+            newValues = util.Counter()
+            for state in self.mdp.getStates():
+                if self.getPolicy(state) is not None:
+                    newValues[state] = self.getQValue(state, self.getPolicy(state))
+            self.values = newValues
 
     def getValue(self, state):
         """
@@ -60,7 +65,16 @@ class ValueIterationAgent(ValueEstimationAgent):
           value function stored in self.values.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        "Q(s,a) = R(s,a) + E P(s'|s,a)*gama*(V(s'))"
+        
+        if self.mdp.isTerminal(state):
+            return self.getReward(state, action, None)
+
+        total = 0
+        for nextState, prob in self.mdp.getTransitionStatesAndProbs(state,action):
+            value = prob * self.discount * self.getValue(nextState)
+            total += value
+        return total + self.mdp.getReward(state, action, None)
 
     def computeActionFromValues(self, state):
         """
@@ -71,8 +85,15 @@ class ValueIterationAgent(ValueEstimationAgent):
           there are no legal actions, which is the case at the
           terminal state, you should return None.
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        "*** YOUR CODE HERE ***"     
+        maxValue = -1e10
+        bestAction = None
+        for action in self.mdp.getPossibleActions(state):
+            value = sum([prob * self.getValue(nextState) for nextState, prob in self.mdp.getTransitionStatesAndProbs(state, action)])
+            if value > maxValue:
+                maxValue = value
+                bestAction = action
+        return bestAction
 
     def getPolicy(self, state):
         return self.computeActionFromValues(state)
