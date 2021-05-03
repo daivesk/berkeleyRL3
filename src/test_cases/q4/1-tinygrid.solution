@@ -78,7 +78,7 @@ q_values_k_2_action_exit: """
 
 q_values_k_2_action_south: """
            illegal
-            0.0000
+            0.0500
            illegal
 """
 
@@ -108,7 +108,7 @@ q_values_k_3_action_exit: """
 
 q_values_k_3_action_south: """
            illegal
-            0.0000
+            0.0500
            illegal
 """
 
@@ -138,7 +138,7 @@ q_values_k_4_action_exit: """
 
 q_values_k_4_action_south: """
            illegal
-            0.0000
+            0.0500
            illegal
 """
 
@@ -168,7 +168,7 @@ q_values_k_5_action_exit: """
 
 q_values_k_5_action_south: """
            illegal
-            0.0000
+            0.0500
            illegal
 """
 
@@ -198,7 +198,7 @@ q_values_k_6_action_exit: """
 
 q_values_k_6_action_south: """
            illegal
-            0.0000
+            0.0500
            illegal
 """
 
@@ -228,7 +228,7 @@ q_values_k_7_action_exit: """
 
 q_values_k_7_action_south: """
            illegal
-            0.1720
+            0.2170
            illegal
 """
 
@@ -258,7 +258,7 @@ q_values_k_8_action_exit: """
 
 q_values_k_8_action_south: """
            illegal
-            0.1720
+            0.2170
            illegal
 """
 
@@ -288,7 +288,7 @@ q_values_k_9_action_exit: """
 
 q_values_k_9_action_south: """
            illegal
-            0.1720
+            0.2170
            illegal
 """
 
@@ -300,13 +300,13 @@ q_values_k_9_action_west: """
 
 q_values_k_100_action_north: """
            illegal
-           -0.4534
+           -0.1999
            illegal
 """
 
 q_values_k_100_action_east: """
            illegal
-            0.4063
+            0.5228
            illegal
 """
 
@@ -318,19 +318,19 @@ q_values_k_100_action_exit: """
 
 q_values_k_100_action_south: """
            illegal
-            2.1267
+            2.4609
            illegal
 """
 
 q_values_k_100_action_west: """
            illegal
-            0.3919
+            0.2765
            illegal
 """
 
 values: """
            -9.4767
-            2.1267
+            2.4609
             9.8175
 """
 
