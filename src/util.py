@@ -112,6 +112,9 @@ class FixedRandom:
             230984053, 719791226, 2718891946, 624), None)
         self.random = random.Random()
         self.random.setstate(fixedState)
+        # makes random.choice behave as in python2 (kudos: https://stackoverflow.com/a/30649908/1251716)
+        self.random.choice = lambda seq: seq[int(self.random.random() * len(seq))]
+
 
 """
  Data structures useful for implementing SearchAgents
